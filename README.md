@@ -175,17 +175,15 @@ Paste this into the Private Plugin's **Markup** field:
         </div>
       </div>
       <div class="ttc-line-body">
-        {% if merge_variables.line1_ok %}
-          <div class="ttc-ok">✓ Good Service</div>
+        {% for a in merge_variables.line1_alerts %}
+          <div class="ttc-alert">
+            <div class="ttc-sev">{{ a.severity }}{% if a.direction %} · {{ a.direction }}{% endif %}</div>
+            <div class="ttc-alert-title">{{ a.title }}</div>
+            {% if a.cause %}<div class="ttc-alert-meta">{{ a.cause }}</div>{% endif %}
+          </div>
         {% else %}
-          {% for a in merge_variables.line1_alerts %}
-            <div class="ttc-alert">
-              <div class="ttc-sev">{{ a.severity }}{% if a.direction %} · {{ a.direction }}{% endif %}</div>
-              <div class="ttc-alert-title">{{ a.title }}</div>
-              {% if a.cause %}<div class="ttc-alert-meta">{{ a.cause }}</div>{% endif %}
-            </div>
-          {% endfor %}
-        {% endif %}
+          <div class="ttc-ok">✓ Good Service</div>
+        {% endfor %}
       </div>
     </div>
 
@@ -199,17 +197,15 @@ Paste this into the Private Plugin's **Markup** field:
         </div>
       </div>
       <div class="ttc-line-body">
-        {% if merge_variables.line2_ok %}
-          <div class="ttc-ok">✓ Good Service</div>
+        {% for a in merge_variables.line2_alerts %}
+          <div class="ttc-alert">
+            <div class="ttc-sev">{{ a.severity }}{% if a.direction %} · {{ a.direction }}{% endif %}</div>
+            <div class="ttc-alert-title">{{ a.title }}</div>
+            {% if a.cause %}<div class="ttc-alert-meta">{{ a.cause }}</div>{% endif %}
+          </div>
         {% else %}
-          {% for a in merge_variables.line2_alerts %}
-            <div class="ttc-alert">
-              <div class="ttc-sev">{{ a.severity }}{% if a.direction %} · {{ a.direction }}{% endif %}</div>
-              <div class="ttc-alert-title">{{ a.title }}</div>
-              {% if a.cause %}<div class="ttc-alert-meta">{{ a.cause }}</div>{% endif %}
-            </div>
-          {% endfor %}
-        {% endif %}
+          <div class="ttc-ok">✓ Good Service</div>
+        {% endfor %}
       </div>
     </div>
 
@@ -223,17 +219,15 @@ Paste this into the Private Plugin's **Markup** field:
         </div>
       </div>
       <div class="ttc-line-body">
-        {% if merge_variables.line5_ok %}
-          <div class="ttc-ok">✓ Good Service</div>
+        {% for a in merge_variables.line5_alerts %}
+          <div class="ttc-alert">
+            <div class="ttc-sev">{{ a.severity }}{% if a.direction %} · {{ a.direction }}{% endif %}</div>
+            <div class="ttc-alert-title">{{ a.title }}</div>
+            {% if a.cause %}<div class="ttc-alert-meta">{{ a.cause }}</div>{% endif %}
+          </div>
         {% else %}
-          {% for a in merge_variables.line5_alerts %}
-            <div class="ttc-alert">
-              <div class="ttc-sev">{{ a.severity }}{% if a.direction %} · {{ a.direction }}{% endif %}</div>
-              <div class="ttc-alert-title">{{ a.title }}</div>
-              {% if a.cause %}<div class="ttc-alert-meta">{{ a.cause }}</div>{% endif %}
-            </div>
-          {% endfor %}
-        {% endif %}
+          <div class="ttc-ok">✓ Good Service</div>
+        {% endfor %}
       </div>
     </div>
 

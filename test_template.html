@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TRMNL Template Test</title>
+  <style>
+    body {
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    /* Simulates the TRMNL 800x480 e-ink canvas */
+    .trmnl-frame {
+      width: 800px;
+      height: 480px;
+      background: #fff;
+      border: 2px solid #333;
+      box-shadow: 4px 4px 12px rgba(0,0,0,0.2);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── Plugin styles (same as README template) ── */
+    .ttc-wrap {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 10px 12px 8px;
+      font-family: sans-serif;
+      color: #000;
+    }
+
+    .ttc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 2px solid currentColor;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+    }
+
+    .ttc-title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .ttc-time {
+      font-size: 11px;
+      opacity: 0.65;
+    }
+
+    .ttc-lines {
+      display: flex;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .ttc-line {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border: 1.5px solid currentColor;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .ttc-line-head {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 8px;
+      border-bottom: 1.5px solid currentColor;
+      background: #000;
+      color: #fff;
+    }
+
+    .ttc-badge {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1.5px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .ttc-line-name {
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .ttc-line-sub {
+      font-size: 8px;
+      opacity: 0.75;
+      line-height: 1;
+    }
+
+    .ttc-line-body {
+      padding: 6px 8px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .ttc-ok {
+      font-size: 10px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .ttc-alert {
+      border-left: 2.5px solid currentColor;
+      padding-left: 5px;
+    }
+
+    .ttc-sev {
+      font-size: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      opacity: 0.7;
+    }
+
+    .ttc-alert-title {
+      font-size: 9px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .ttc-alert-meta {
+      font-size: 8px;
+      opacity: 0.65;
+      line-height: 1.3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="trmnl-frame">
+  <div class="ttc-wrap">
+    <div class="ttc-header">
+      <span class="ttc-title">TTC Subway</span>
+      <span class="ttc-time">7:35 AM</span>
+    </div>
+
+    <div class="ttc-lines">
+
+      <!-- Line 1: Good Service -->
+      <div class="ttc-line">
+        <div class="ttc-line-head">
+          <div class="ttc-badge">1</div>
+          <div>
+            <div class="ttc-line-name">Line 1</div>
+            <div class="ttc-line-sub">Yonge–University</div>
+          </div>
+        </div>
+        <div class="ttc-line-body">
+          <div class="ttc-ok">✓ Good Service</div>
+        </div>
+      </div>
+
+      <!-- Line 2: Active alerts -->
+      <div class="ttc-line">
+        <div class="ttc-line-head">
+          <div class="ttc-badge">2</div>
+          <div>
+            <div class="ttc-line-name">Line 2</div>
+            <div class="ttc-line-sub">Bloor–Danforth</div>
+          </div>
+        </div>
+        <div class="ttc-line-body">
+          <div class="ttc-alert">
+            <div class="ttc-sev">Major · Westbound</div>
+            <div class="ttc-alert-title">Signal Problem at Spadina</div>
+            <div class="ttc-alert-meta">Equipment failure</div>
+          </div>
+          <div class="ttc-alert">
+            <div class="ttc-sev">Minor</div>
+            <div class="ttc-alert-title">Residual Delays</div>
+            <div class="ttc-alert-meta">Earlier incident</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Line 5: Good Service -->
+      <div class="ttc-line">
+        <div class="ttc-line-head">
+          <div class="ttc-badge">5</div>
+          <div>
+            <div class="ttc-line-name">Line 5</div>
+            <div class="ttc-line-sub">Eglinton Crosstown</div>
+          </div>
+        </div>
+        <div class="ttc-line-body">
+          <div class="ttc-ok">✓ Good Service</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
