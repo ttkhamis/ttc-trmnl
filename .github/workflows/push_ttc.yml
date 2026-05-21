@@ -2,10 +2,11 @@ name: Push TTC Alerts to TRMNL
 
 on:
   schedule:
-    # 6–8 AM ET — covers both EST (UTC-5) and EDT (UTC-4)
-    - cron: '*/5 10-13 * * 1-5'
-    # 3–5 PM ET — covers both EST (UTC-5) and EDT (UTC-4)
-    - cron: '*/5 19-22 * * 1-5'
+    # TESTING — every 30 min, all day
+    - cron: '*/30 * * * *'
+    # Production schedules (re-enable when done testing):
+    # - cron: '*/5 10-13 * * 1-5'   # 6–8 AM ET
+    # - cron: '*/5 19-22 * * 1-5'   # 3–5 PM ET
   workflow_dispatch: {}
 
 jobs:

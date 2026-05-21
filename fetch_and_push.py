@@ -124,9 +124,10 @@ def push_to_trmnl(payload: dict, webhook_url: str) -> None:
 
 
 def main() -> None:
-    if not in_commute_window():
-        print('Outside commute window — skipping.')
-        sys.exit(0)
+    # Uncomment when done testing:
+    # if not in_commute_window():
+    #     print('Outside commute window — skipping.')
+    #     sys.exit(0)
 
     webhook_url = os.environ.get('TRMNL_WEBHOOK_URL')
     if not webhook_url:
