@@ -119,6 +119,9 @@ def build_payload(alerts: list, fetch_time: str) -> dict:
 
 def push_to_trmnl(payload: dict, webhook_url: str) -> None:
     resp = requests.post(webhook_url, json=payload, timeout=15)
+    if resp.status_code >= 500:
+        print(f'Warning: TRMNL server error {resp.status_code} — will retry next run.')
+        return
     resp.raise_for_status()
     print(f'Pushed to TRMNL: HTTP {resp.status_code}')
 
@@ -138,7 +141,7 @@ def main() -> None:
     if error:
         print(f'Warning: {error}', file=sys.stderr)
 
-    fetch_time = datetime.now(TORONTO_TZ).strftime('%-I:%M %p')
+    fetch_time = datetime.now(TORONTO_TZ).strftime('%a %-I:%M %p')
     payload = build_payload(alerts, fetch_time)
 
     push_to_trmnl(payload, webhook_url)
