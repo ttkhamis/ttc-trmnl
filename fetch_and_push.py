@@ -118,12 +118,15 @@ def build_payload(alerts: list, fetch_time: str, run_number: str = 'local') -> d
 
 
 def push_to_trmnl(payload: dict, webhook_url: str) -> None:
+    import json
+    print(f'Sending payload: {json.dumps(payload, indent=2)}')
     resp = requests.post(webhook_url, json=payload, timeout=15)
+    print(f'TRMNL response: HTTP {resp.status_code}')
+    print(f'TRMNL response body: {resp.text}')
     if resp.status_code >= 500:
         print(f'Warning: TRMNL server error {resp.status_code} — will retry next run.')
         return
     resp.raise_for_status()
-    print(f'Pushed to TRMNL: HTTP {resp.status_code}')
 
 
 def main() -> None:
