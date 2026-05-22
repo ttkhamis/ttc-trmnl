@@ -117,10 +117,11 @@ def build_payload(alerts: list, fetch_time: str, run_number: str = 'local') -> d
     return {'merge_variables': merge_vars}
 
 
-def push_to_trmnl(payload: dict, webhook_url: str) -> None:
+def push_to_trmnl(payload: dict, webhook_url: str, api_key: str) -> None:
     import json
     print(f'Sending payload: {json.dumps(payload, indent=2)}')
-    resp = requests.post(webhook_url, json=payload, timeout=15)
+    headers = {'Authorization': f'Bearer {api_key}'}
+    resp = requests.post(webhook_url, json=payload, headers=headers, timeout=15)
     print(f'TRMNL response: HTTP {resp.status_code}')
     print(f'TRMNL response body: {resp.text}')
     if resp.status_code >= 500:
@@ -140,6 +141,11 @@ def main() -> None:
         print('Error: TRMNL_WEBHOOK_URL environment variable not set.', file=sys.stderr)
         sys.exit(1)
 
+    api_key = os.environ.get('TRMNL_API_KEY')
+    if not api_key:
+        print('Error: TRMNL_API_KEY environment variable not set.', file=sys.stderr)
+        sys.exit(1)
+
     alerts, error = fetch_alerts()
     if error:
         print(f'Warning: {error}', file=sys.stderr)
@@ -148,7 +154,7 @@ def main() -> None:
     run_number = os.environ.get('GITHUB_RUN_NUMBER', 'local')
     payload = build_payload(alerts, fetch_time, run_number)
 
-    push_to_trmnl(payload, webhook_url)
+    push_to_trmnl(payload, webhook_url, api_key)
 
 
 if __name__ == '__main__':
