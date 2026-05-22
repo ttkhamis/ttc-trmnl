@@ -62,7 +62,6 @@ Paste this into the Private Plugin's **Markup** field:
 
   .ttc-time {
     font-size: 11px;
-    opacity: 0.65;
   }
 
   .ttc-lines {
@@ -160,7 +159,7 @@ Paste this into the Private Plugin's **Markup** field:
 <div class="ttc-wrap">
   <div class="ttc-header">
     <span class="ttc-title">TTC Subway</span>
-    <span class="ttc-time">{{ merge_variables.updated_at }}</span>
+    <span class="ttc-time">{{ merge_variables.updated_at }} · #{{ merge_variables.run_number }}</span>
   </div>
 
   <div class="ttc-lines">

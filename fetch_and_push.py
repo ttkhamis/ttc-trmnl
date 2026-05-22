@@ -91,7 +91,7 @@ def fetch_alerts() -> tuple[list, str | None]:
     return alerts, None
 
 
-def build_payload(alerts: list, fetch_time: str) -> dict:
+def build_payload(alerts: list, fetch_time: str, run_number: str = 'local') -> dict:
     def line_vars(line_num: int) -> dict:
         line_alerts = [a for a in alerts if a['line'] == line_num]
         return {
@@ -110,7 +110,7 @@ def build_payload(alerts: list, fetch_time: str) -> dict:
             ],
         }
 
-    merge_vars = {'updated_at': fetch_time}
+    merge_vars = {'updated_at': fetch_time, 'run_number': run_number}
     for n in (1, 2, 5):
         merge_vars.update(line_vars(n))
 
@@ -142,7 +142,8 @@ def main() -> None:
         print(f'Warning: {error}', file=sys.stderr)
 
     fetch_time = datetime.now(TORONTO_TZ).strftime('%a %-I:%M %p')
-    payload = build_payload(alerts, fetch_time)
+    run_number = os.environ.get('GITHUB_RUN_NUMBER', 'local')
+    payload = build_payload(alerts, fetch_time, run_number)
 
     push_to_trmnl(payload, webhook_url)
 
