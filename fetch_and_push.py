@@ -124,10 +124,9 @@ def build_payload(alerts: list, fetch_time: str, run_number: str = 'local') -> d
 
 def push_to_trmnl(payload: dict, webhook_url: str, api_key: str) -> None:
     import json
-    canonical_url = webhook_url.replace('https://trmnl.com/', 'https://usetrmnl.com/')
-    print(f'Posting to: {canonical_url}')
+    print(f'Posting to: {webhook_url}')
     print(f'Sending payload: {json.dumps(payload, indent=2)}')
-    resp = requests.post(canonical_url, json=payload, timeout=15)
+    resp = requests.post(webhook_url, json=payload, timeout=15)
     print(f'TRMNL response: HTTP {resp.status_code}')
     print(f'TRMNL response body: {resp.text}')
     if resp.status_code >= 500:
