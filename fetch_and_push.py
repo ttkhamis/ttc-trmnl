@@ -91,30 +91,35 @@ def fetch_alerts() -> tuple[list, str | None]:
     return alerts, None
 
 
+def format_line_html(alerts: list, line_num: int) -> str:
+    line_alerts = [a for a in alerts if a['line'] == line_num]
+    if not line_alerts:
+        return '<div class="ttc-ok">&#10003; Good Service</div>'
+    parts = []
+    for a in line_alerts:
+        sev = a['severity']
+        direction = f' &middot; {a["direction"]}' if a['direction'] else ''
+        cause = f'<div class="ttc-alert-meta">{a["cause"]}</div>' if a['cause'] else ''
+        parts.append(
+            f'<div class="ttc-alert">'
+            f'<div class="ttc-sev">{sev}{direction}</div>'
+            f'<div class="ttc-alert-title">{a["title"]}</div>'
+            f'{cause}'
+            f'</div>'
+        )
+    return ''.join(parts)
+
+
 def build_payload(alerts: list, fetch_time: str, run_number: str = 'local') -> dict:
-    def line_vars(line_num: int) -> dict:
-        line_alerts = [a for a in alerts if a['line'] == line_num]
-        return {
-            f'line{line_num}_ok':     len(line_alerts) == 0,
-            f'line{line_num}_count':  len(line_alerts),
-            f'line{line_num}_alerts': [
-                {
-                    'severity':  a['severity'],
-                    'title':     a['title'],
-                    'effect':    a['effect'],
-                    'cause':     a['cause'],
-                    'direction': a['direction'],
-                    'time_range': a['time_range'],
-                }
-                for a in line_alerts
-            ],
+    return {
+        'merge_variables': {
+            'updated_at':  fetch_time,
+            'run_number':  run_number,
+            'line1_html':  format_line_html(alerts, 1),
+            'line2_html':  format_line_html(alerts, 2),
+            'line5_html':  format_line_html(alerts, 5),
         }
-
-    merge_vars = {'updated_at': fetch_time, 'run_number': run_number}
-    for n in (1, 2, 5):
-        merge_vars.update(line_vars(n))
-
-    return {'merge_variables': merge_vars}
+    }
 
 
 def push_to_trmnl(payload: dict, webhook_url: str, api_key: str) -> None:

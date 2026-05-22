@@ -173,17 +173,7 @@ Paste this into the Private Plugin's **Markup** field:
           <div class="ttc-line-sub">Yonge–University</div>
         </div>
       </div>
-      <div class="ttc-line-body">
-        {% for a in merge_variables.line1_alerts %}
-          <div class="ttc-alert">
-            <div class="ttc-sev">{{ a.severity }}{% if a.direction %} · {{ a.direction }}{% endif %}</div>
-            <div class="ttc-alert-title">{{ a.title }}</div>
-            {% if a.cause %}<div class="ttc-alert-meta">{{ a.cause }}</div>{% endif %}
-          </div>
-        {% else %}
-          <div class="ttc-ok">✓ Good Service</div>
-        {% endfor %}
-      </div>
+      <div class="ttc-line-body">{{ merge_variables.line1_html }}</div>
     </div>
 
     <!-- Line 2 -->
@@ -195,17 +185,7 @@ Paste this into the Private Plugin's **Markup** field:
           <div class="ttc-line-sub">Bloor–Danforth</div>
         </div>
       </div>
-      <div class="ttc-line-body">
-        {% for a in merge_variables.line2_alerts %}
-          <div class="ttc-alert">
-            <div class="ttc-sev">{{ a.severity }}{% if a.direction %} · {{ a.direction }}{% endif %}</div>
-            <div class="ttc-alert-title">{{ a.title }}</div>
-            {% if a.cause %}<div class="ttc-alert-meta">{{ a.cause }}</div>{% endif %}
-          </div>
-        {% else %}
-          <div class="ttc-ok">✓ Good Service</div>
-        {% endfor %}
-      </div>
+      <div class="ttc-line-body">{{ merge_variables.line2_html }}</div>
     </div>
 
     <!-- Line 5 -->
@@ -217,17 +197,7 @@ Paste this into the Private Plugin's **Markup** field:
           <div class="ttc-line-sub">Eglinton Crosstown</div>
         </div>
       </div>
-      <div class="ttc-line-body">
-        {% for a in merge_variables.line5_alerts %}
-          <div class="ttc-alert">
-            <div class="ttc-sev">{{ a.severity }}{% if a.direction %} · {{ a.direction }}{% endif %}</div>
-            <div class="ttc-alert-title">{{ a.title }}</div>
-            {% if a.cause %}<div class="ttc-alert-meta">{{ a.cause }}</div>{% endif %}
-          </div>
-        {% else %}
-          <div class="ttc-ok">✓ Good Service</div>
-        {% endfor %}
-      </div>
+      <div class="ttc-line-body">{{ merge_variables.line5_html }}</div>
     </div>
 
   </div>
