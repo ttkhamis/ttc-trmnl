@@ -25,4 +25,5 @@ jobs:
       - name: Fetch alerts and push to TRMNL
         env:
           TRMNL_WEBHOOK_URL: ${{ secrets.TRMNL_WEBHOOK_URL }}
+          TRMNL_API_KEY: ${{ secrets.TRMNL_API_KEY }}
         run: python fetch_and_push.py
